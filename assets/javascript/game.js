@@ -18,12 +18,32 @@ var game = {
     },
     defenderSelect : function(defenderIndex) {
         this.defender = this.enemy[defenderIndex];
+        this.status();
     },
     attack : function() {
     	this.defender[1] -= (this.fighter[0][2] + (6 * this.attackRound));
     	this.attackRound ++;
     	if (this.defender[1] <= 0) {
-    		this.nextRound();
+    		
+    		$("#defender").empty();
+    		this.enemy.splice(this.enemy.indexOf(this.defender),1);
+    		if (typeof this.enemy[0] === "undefined") {
+    			$("button").prop("disabled",true);
+    			$("#display").text("You won! Click to restart!");
+    			$("#display").click(function() {
+    				location.reload();
+				});
+    		}
+    		this.defender = undefined;
+
+    		game.lineup(game.enemy, "#enemy");
+    		$(".Img").on("click", function() {
+        		var index = ($(this).attr("data-playerIndex"));
+        		console.log(index);
+        		game.defenderSelect(index);
+        		$("#enemy").empty();
+       	 	})
+    		this.attackRound = 0;
     		this.fighter[0][1] += 50;
     	}else {
     		this.fighter[0][1] -= this.defender[3];
@@ -31,54 +51,61 @@ var game = {
     			this.gameover();
     		}
     	}
-    },
-    nextRound : function() {
-    	this.enemy.splice(this.enemy.indexOf(this.defender),1);
-    	if (typeof this.enemy[0] !== "undefined") {
-    		this.defender = this.enemy[0]; //pick defender
-    		this.attackRound = 0;
-    	}else {
-    		$("#display").text("You won! Click to restart!");
-    		$("#display").click(function() {
-    			location.reload();
-			});
-    	}
+    	this.status();
     },
     gameover : function() {
-    	$("#display").text("Game Over! Click to restart!");
+    	$("button").prop("disabled",true);
+    	$("#display").text("You lose! Game Over! Click to restart!");
     	$("#display").click(function() {
     		location.reload();
 		});
+    },
+    lineup : function(group, place) {
+    	for (var i = 0; i < group.length; i++) {
+    		var imgChar = $("<img>").addClass("Img").attr("src", group[i][4]).attr("data-playerIndex", i) .css("width", "200px");
+    		$(place).append(imgChar);
+    	}
+    },
+    status : function() {
+    	$("#fighter").html($("<img>").attr("src", game.fighter[0][4]).css("width", "200px"));
+        $("#fighter").append("<p>" + game.fighter[0][0] + "</p>");
+        $("#fighter").append("<p>HP: " + game.fighter[0][1] + "</p>");
+        $("#defender").html($("<img>").attr("src", game.defender[4]).css("width", "200px"));
+        $("#defender").append("<p>" + game.defender[0] + "</p>");
+        $("#defender").append("<p>HP: " + game.defender[1] + "</p>");
     }
 }
 
 $(document).ready(function() {
 
-    for (var i = 0; i < game.character.length; i++) {
-        var imgChar1 = $("<img>").addClass("image").attr("src", game.character[i][4]).attr("data-fighterIndex", i) .css("width", "200px");
+    game.lineup(game.character, "#lineup");
 
-        $("#lineup").append(imgChar1);
-    }
-
-    $(".image").on("click", function() {
-        var index = ($(this).attr("data-fighterIndex"));
-        console.log(index);
+    $(".Img").on("click", function() {
+        var index = ($(this).attr("data-playerIndex"));
+        //console.log(index);
         game.fighterSelect(index);
         $("#fighter").html($("<img>").attr("src", game.fighter[0][4]).css("width", "200px"));
         $("#fighter").append("<p>" + game.fighter[0][0] + "</p>");
         $("#fighter").append("<p>HP: " + game.fighter[0][1] + "</p>");
         $("#lineup").empty();
 
-        console.log(game.enemy);
+        //console.log(game.enemy);
 
-        for (var i = 0; i < game.enemy.length; i++) {
-            var imgChar2 = $("<img>").addClass("image").attr("src", game.enemy[i][4]).attr("data-defenderIndex", i) .css("width", "200px");
+        game.lineup(game.enemy, "#enemy");
 
-        $("#lineup").append(imgChar2);
-        }
+		$(".Img").on("click", function() {
+        	var index = ($(this).attr("data-playerIndex"));
+        	//console.log(index);
+        	game.defenderSelect(index);
+        	
+        	$("#enemy").empty();
+
+    	})
     })
 
-    
+    $("button").on("click", function() {
+    	game.attack();
+    })
 
 });
 
