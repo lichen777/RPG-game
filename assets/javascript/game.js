@@ -62,15 +62,15 @@ var game = {
     },
     lineup : function(group, place) {
     	for (var i = 0; i < group.length; i++) {
-    		var imgChar = $("<img>").addClass("Img").attr("src", group[i][4]).attr("data-playerIndex", i) .css("width", "200px");
+    		var imgChar = $("<img>").addClass("Img").attr("src", group[i][4]).attr("data-playerIndex", i) .css("width", "25%");
     		$(place).append(imgChar);
     	}
     },
     status : function() {
-    	$("#fighter").html($("<img>").attr("src", game.fighter[0][4]).css("width", "200px"));
+    	$("#fighter").html($("<img>").attr("src", game.fighter[0][4]).css("width", "25%"));
         $("#fighter").append("<p>" + game.fighter[0][0] + "</p>");
         $("#fighter").append("<p>HP: " + game.fighter[0][1] + "</p>");
-        $("#defender").html($("<img>").attr("src", game.defender[4]).css("width", "200px"));
+        $("#defender").html($("<img>").attr("src", game.defender[4]).css("width", "25%"));
         $("#defender").append("<p>" + game.defender[0] + "</p>");
         $("#defender").append("<p>HP: " + game.defender[1] + "</p>");
     }
@@ -84,7 +84,7 @@ $(document).ready(function() {
         var index = ($(this).attr("data-playerIndex"));
         //console.log(index);
         game.fighterSelect(index);
-        $("#fighter").html($("<img>").attr("src", game.fighter[0][4]).css("width", "200px"));
+        $("#fighter").html($("<img>").attr("src", game.fighter[0][4]).css("width", "25%"));
         $("#fighter").append("<p>" + game.fighter[0][0] + "</p>");
         $("#fighter").append("<p>HP: " + game.fighter[0][1] + "</p>");
         $("#lineup").empty();
