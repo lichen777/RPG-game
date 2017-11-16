@@ -13,16 +13,33 @@
 <body>
 	<div id="wrap">
 		<div class="w-100">
+				<h1 class="text-center">RPG!</h1>
 			<div class="container text-left">
-				<h1>Game</h1>
-				<div>
-					<div id="lineup"></div>
-					<h3>Your Fighter</h3>
-					<div id="fighter"></div>
-					<button type="button" class="btn btn-danger">attack</button>
-					<div id="enemy"></div>
-					<h3>Defender</h3>
-					<div id="defender"></div>
+				<div class="row">
+					<div class="col-6">
+						<h5>Select Your Character</h5>
+						<div id="lineup"></div>
+					</div>
+					<div class="col-6">
+						<h5>Enemies Available To Attack</h5>
+						<div id="enemy"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<h5>Your Fighter</h5>
+						<div id="fighter"></div>
+						<div id="display"></div>
+					</div>
+					<div class="col-6">
+						<h5>Defender</h5>
+						<div id="defender"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div>
+						<button type="button" class="btn btn-danger">attack</button>
+					</div>
 					<div id="display"></div>
 				</div>
 			</div> <!-- container -->
