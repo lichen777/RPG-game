@@ -29,13 +29,12 @@ var game = {
     		this.enemy.splice(this.enemy.indexOf(this.defender),1);
     		if (typeof this.enemy[0] === "undefined") {
     			$("button").prop("disabled",true);
-    			$("#display").text("You won! Click to restart!");
+    			$("#display").html("<p>You won! Click to restart!</p>");
     			$("#display").click(function() {
     				location.reload();
 				});
     		}
     		this.defender = undefined;
-
     		game.lineup(game.enemy, "#enemy");
     		$(".Img").on("click", function() {
         		var index = ($(this).attr("data-playerIndex"));
@@ -43,8 +42,8 @@ var game = {
         		game.defenderSelect(index);
         		$("#enemy").empty();
        	 	})
-    		this.attackRound = 0;
-    		this.fighter[0][1] += 50;
+    		//this.attackRound = 0;
+    		//this.fighter[0][1] += 50;
     	}else {
     		this.fighter[0][1] -= this.defender[3];
     		if (this.fighter[0][1] <= 0){
@@ -55,7 +54,7 @@ var game = {
     },
     gameover : function() {
     	$("button").prop("disabled",true);
-    	$("#display").text("You lose! Game Over! Click to restart!");
+    	$("#display").html("<p>You lose! Game Over! Click to restart!</p>");
     	$("#display").click(function() {
     		location.reload();
 		});
