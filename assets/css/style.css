@@ -1,7 +1,13 @@
 .row {
-	min-height: 180px;
+	min-height: 250px;
 }
 
-.container {
-	background-image: url("https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj8ldvY1sTXAhWMLyYKHUYLBzkQjRwIBw&url=http%3A%2F%2Fwallup.net%2Fnature-pokemon%2F&psig=AOvVaw0ZYRmdvkzhaaylTqwJzD4H&ust=1510976077654369");
+#wrap {
+	background: url("../images/background.jpg") no-repeat center;
+	background-size: cover;
+}
+
+h5, p {
+	font-family: 'Play', sans-serif;
+	color: #333;
 }
