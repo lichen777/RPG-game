@@ -12,19 +12,23 @@ var game = {
     enemy: undefined,
     defender : undefined,
     attackRound : 0,
+    APIncrease : 6,
     fighterSelect : function(fighterIndex) {
         this.fighter = this.character.splice(fighterIndex, 1);
         this.enemy = this.character;
+        $("#first").hide();
     },
     defenderSelect : function(defenderIndex) {
         this.defender = this.enemy[defenderIndex];
+        $("#enemy").empty();
         this.status();
     },
     attack : function() {
-    	this.defender[1] -= (this.fighter[0][2] + (6 * this.attackRound));
+        $("#info").empty();
+        var HPdamage = (this.fighter[0][2] + (this.APIncrease * this.attackRound))
+    	this.defender[1] -= HPdamage;
     	this.attackRound ++;
     	if (this.defender[1] <= 0) {
-    		
     		$("#defender").empty();
     		this.enemy.splice(this.enemy.indexOf(this.defender),1);
     		if (typeof this.enemy[0] === "undefined") {
@@ -34,21 +38,22 @@ var game = {
     				location.reload();
 				});
     		}
+            $("#info").html("<p>" + this.defender[0] + " has been defeated</p>")
     		this.defender = undefined;
     		game.lineup(game.enemy, "#enemy");
     		$(".Img").on("click", function() {
         		var index = ($(this).attr("data-playerIndex"));
         		console.log(index);
         		game.defenderSelect(index);
-        		$("#enemy").empty();
        	 	})
-    		//this.attackRound = 0;
-    		//this.fighter[0][1] += 50;
+    		//this.attackRound = 0;   // this is a real RPG should have
+    		//this.fighter[0][1] += 50;   // this is a real RPG should have
     	}else {
     		this.fighter[0][1] -= this.defender[3];
     		if (this.fighter[0][1] <= 0){
     			this.gameover();
     		}
+            $("#info").html("<p>You attacked " + this.defender[0] + " for " + HPdamage + " HP damage.</p><p>" + this.defender[0] + " counter attacked you for " + this.defender[3] + " HP damage.</p>")
     	}
     	this.status();
     },
@@ -88,22 +93,21 @@ $(document).ready(function() {
         $("#fighter").append("<p>HP: " + game.fighter[0][1] + "</p>");
         $("#lineup").empty();
 
-        //console.log(game.enemy);
-
         game.lineup(game.enemy, "#enemy");
 
 		$(".Img").on("click", function() {
         	var index = ($(this).attr("data-playerIndex"));
         	//console.log(index);
         	game.defenderSelect(index);
-        	
-        	$("#enemy").empty();
-
     	})
     })
 
     $("button").on("click", function() {
-    	game.attack();
+        if(typeof game.defender === "undefined"){
+            $("#info").html("<p>Select an enemy</p>");
+        }else {
+            game.attack();
+        }
     })
 
 });

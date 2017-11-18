@@ -1,9 +1,9 @@
 .row {
-	min-height: 250px;
+	min-height: 150px;
 }
 
 #wrap {
-	background: url("../images/background.jpg") no-repeat center;
+	background: url("../images/background.jpg") no-repeat center top;
 	background-size: cover;
 }
 
