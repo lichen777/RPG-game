@@ -103,6 +103,7 @@ $(document).ready(function() {
     })
 
     $("button").on("click", function() {
+	console.log(typeof game.defender);
         if(typeof game.defender === "undefined"){
             $("#info").html("<p>Select an enemy</p>");
         }else {
