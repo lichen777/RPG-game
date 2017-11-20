@@ -44,7 +44,7 @@ var game = {
     		$(".Img").on("click", function() {
         		var index = ($(this).attr("data-playerIndex"));
         		console.log(index);
-        		this.defenderSelect(index);
+        		game.defenderSelect(index);
        	 	})
     		//this.attackRound = 0;   // this is a real RPG should have
     		//this.fighter[0][1] += 50;   // this is a real RPG should have
