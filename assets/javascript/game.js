@@ -10,7 +10,7 @@ var game = {
 
     fighter: [],
     enemy: [],
-    defender : [],
+    defender : undefined,
     attackRound : 0,
     APIncrease : 6,
     fighterSelect : function(fighterIndex) {
