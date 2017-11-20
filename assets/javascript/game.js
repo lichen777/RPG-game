@@ -38,13 +38,13 @@ var game = {
     				location.reload();
 				});
     		}
-            $("#info").html("<p>" + this.defender[0] + " has been defeated</p>")
+            	$("#info").html("<p>" + this.defender[0] + " has been defeated</p>");
     		this.defender = undefined;
-    		game.lineup(game.enemy, "#enemy");
+    		this.lineup(this.enemy, "#enemy");
     		$(".Img").on("click", function() {
         		var index = ($(this).attr("data-playerIndex"));
         		console.log(index);
-        		game.defenderSelect(index);
+        		this.defenderSelect(index);
        	 	})
     		//this.attackRound = 0;   // this is a real RPG should have
     		//this.fighter[0][1] += 50;   // this is a real RPG should have
@@ -95,7 +95,7 @@ $(document).ready(function() {
 
         game.lineup(game.enemy, "#enemy");
 
-		$(".Img").on("click", function() {
+	$(".Img").on("click", function() {
         	var index = ($(this).attr("data-playerIndex"));
         	//console.log(index);
         	game.defenderSelect(index);
