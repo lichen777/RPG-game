@@ -8,9 +8,9 @@ var game = {
 
     characterItem : ["Name", "HP", "AP", "counterAP", "Img"],
 
-    fighter: undefined,
-    enemy: undefined,
-    defender : undefined,
+    fighter: [],
+    enemy: [],
+    defender : [],
     attackRound : 0,
     APIncrease : 6,
     fighterSelect : function(fighterIndex) {
